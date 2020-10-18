@@ -1,7 +1,36 @@
 import container from './config/iocConfig';
-import Repository from './data/repository';
-import SERVICE_IDENTIFIER from './constants/identifiers';
+import SERVICE_IDENTIFIER from './data/models/constants/identifiers';
+import {
+  BasicRequestHandler,
+  RequestHandler,
+  CreateDinosaurRequest,
+  GetDinosaurInfoRequest,
+  GetDinosaurInfoResponse,
+  GetEnvironmentStatusRequest,
+} from './services';
+import SERVICE_IDENTIFIERS from './data/models/constants/identifiers';
 
-const repository = container.get<Repository>(SERVICE_IDENTIFIER.REPOSITORY);
+const createDinosaurHandler = container.get<BasicRequestHandler<CreateDinosaurRequest>>(SERVICE_IDENTIFIER.CREATE_DINOSAUR_HANDLER);
+const getDinosaurInfoHandler = container.get<RequestHandler<GetDinosaurInfoRequest, GetDinosaurInfoResponse>>(SERVICE_IDENTIFIERS.GET_DINOSAUR_INFO_HANDLER);
+const getEnvironmentStatusHandler = container.get<RequestHandler<GetEnvironmentStatusRequest, GetEnvironmentStatusRequest>>(SERVICE_IDENTIFIERS.GET_ENVIRONMENT_STATUS_HANDLER);
 
-console.log(repository.dinosaur.length);
+const createRes1 = createDinosaurHandler.handleRequest({
+  name: 'Bill',
+});
+
+const createRes2 = createDinosaurHandler.handleRequest({
+  name: 'Ash',
+});
+
+const getRes = getDinosaurInfoHandler.handleRequest({});
+
+console.log('Request 1:');
+console.log(`Response: ${createRes1.statusCode.toString()}`);
+console.log();
+console.log('Request 2:');
+console.log(`Response: ${createRes2.statusCode.toString()}`);
+console.log();
+console.log('Get result:');
+console.log(`Name: ${getRes.successResponse.dinosaur.name}, Age: ${getRes.successResponse.dinosaur.age}`);
+
+console.log(getEnvironmentStatusHandler.handleRequest({}).successResponse);

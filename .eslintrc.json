@@ -15,6 +15,7 @@
         "@typescript-eslint"
     ],
     "rules": {
-        "semi": "off"
+        "semi": "off",
+        "max-len": "off"
     }
 }

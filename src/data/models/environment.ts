@@ -1,5 +1,7 @@
 interface Environment {
-    waste : number;
+    poop : number;
+    food: number;
+    water: number;
 }
 
 export default Environment;
