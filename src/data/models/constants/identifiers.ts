@@ -3,6 +3,7 @@ const SERVICE_IDENTIFIERS = {
 
   // dinosaur/queries
   GET_DINOSAUR_INFO_HANDLER: Symbol('GetDinosaurInfoHandler'),
+  GET_DINOSAUR_STATUS_HANDLER: Symbol('GetDinosaurStatusHandler'),
 
   // dinosaur/commands
   CREATE_DINOSAUR_HANDLER: Symbol('CreateDinosaurHandler'),

@@ -8,6 +8,9 @@ import {
   GetDinosaurInfoRequest,
   GetDinosaurInfoResponse,
   GetDinosaurInfoHandler,
+  GetDinosaurStatusRequest,
+  GetDinosaurStatusResponse,
+  GetDinosaurStatusHandler,
   CreateDinosaurRequest,
   CreateDinosaurHandler,
   RequestHandler,
@@ -38,6 +41,10 @@ container
 container
     .bind<RequestHandler<GetDinosaurInfoRequest, GetDinosaurInfoResponse>>(SERVICE_IDENTIFIERS.GET_DINOSAUR_INFO_HANDLER)
     .to(GetDinosaurInfoHandler);
+
+container
+    .bind<RequestHandler<GetDinosaurStatusRequest, GetDinosaurStatusResponse>>(SERVICE_IDENTIFIERS.GET_DINOSAUR_STATUS_HANDLER)
+    .to(GetDinosaurStatusHandler);
 
 container
     .bind<RequestHandler<GetEnvironmentStatusRequest, GetEnvironmentStatusResponse>>(SERVICE_IDENTIFIERS.GET_ENVIRONMENT_STATUS_HANDLER)

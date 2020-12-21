@@ -2,6 +2,10 @@ export {default as GetDinosaurInfoRequest} from './dinosaur/queries/getDinosaurI
 export {default as GetDinosaurInfoResponse} from './dinosaur/queries/getDinosaurInfo/getDinosaurInfoResponse';
 export {default as GetDinosaurInfoHandler} from './dinosaur/queries/getDinosaurInfo/getDinosaurInfoHandler';
 
+export {default as GetDinosaurStatusRequest} from './dinosaur/queries/getDinosaurStatus/getDinosaurStatusRequest';
+export {default as GetDinosaurStatusResponse} from './dinosaur/queries/getDinosaurStatus/getDinosaurStatusResponse';
+export {default as GetDinosaurStatusHandler} from './dinosaur/queries/getDinosaurStatus/getDinosaurStatusHandler';
+
 export {default as CreateDinosaurRequest} from './dinosaur/commands/createDinosaur/createDinosaurRequest';
 export {default as CreateDinosaurHandler} from './dinosaur/commands/createDinosaur/createDinosaurHandler';
 
