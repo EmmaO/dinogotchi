@@ -4,7 +4,10 @@ import {BasicRequestHandler} from '../../../generic/requestHandler';
 import {StatusCodes} from 'http-status-codes';
 import ERRORS from '../../../../data/models/constants/errors';
 import ClearWasteRequest from './clearWasteRequest';
+import {injectable, inject} from 'inversify';
+import SERVICE_IDENTIFIERS from '../../../../data/models/constants/identifiers';
 
+@injectable()
 /**
  * Handles ClearWasteRequests
  */
@@ -16,7 +19,7 @@ export default class ClearWasteHandler implements BasicRequestHandler<ClearWaste
    * Constructor
    * @param {Repository} repository The datastore containing the dinosaur and environment
    */
-  public constructor(repository : Repository) {
+  public constructor(@inject(SERVICE_IDENTIFIERS.REPOSITORY) repository : Repository) {
     this._repository = repository;
   }
 

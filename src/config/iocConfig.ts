@@ -30,7 +30,13 @@ import {
   GetEnvironmentStatusRequest,
   GetEnvironmentStatusResponse,
   GetEnvironmentStatusHandler,
+  IncrementTimeBasedEventsRequest,
+  IncrementTimeBasedEventsHandler,
 } from '../services/index';
+import DinosaurDeathChecker from '../services/dinosaur/common/dinosaurDeathUpdate/dinosaurDeathChecker';
+import FullDinosaurDeathChecker from '../services/dinosaur/common/dinosaurDeathUpdate/fullDinosaurDeathChecker';
+import DinosaurDeathUpdater from '../services/dinosaur/common/dinosaurDeathUpdate/dinosaurDeathUpdater';
+import SingleDinosaurDeathUpdater from '../services/dinosaur/common/dinosaurDeathUpdate/singleDinosaurDeathUpdater';
 
 const container = new Container();
 container
@@ -77,5 +83,17 @@ container
 container
     .bind<BasicRequestHandler<ClearWasteRequest>>(SERVICE_IDENTIFIERS.CLEAR_WASTE_HANDLER)
     .to(ClearWasteHandler);
+
+container
+    .bind<BasicRequestHandler<IncrementTimeBasedEventsRequest>>(SERVICE_IDENTIFIERS.INCREMENT_TIME_BASED_EVENTS_HANDLER)
+    .to(IncrementTimeBasedEventsHandler);
+
+container
+    .bind<DinosaurDeathChecker>(SERVICE_IDENTIFIERS.DINOSAUR_DEATH_CHECKER)
+    .to(FullDinosaurDeathChecker);
+
+container
+    .bind<DinosaurDeathUpdater>(SERVICE_IDENTIFIERS.DINOSAUR_DEATH_UPDATER)
+    .to(SingleDinosaurDeathUpdater);
 
 export default container;

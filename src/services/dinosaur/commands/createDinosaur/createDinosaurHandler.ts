@@ -53,6 +53,7 @@ export default class CreateDinosaurHandler implements BasicRequestHandler<Create
         born: ZonedDateTime.now(ZoneOffset.UTC).toInstant(),
         died: null,
         causeOfDeath: null,
+        environment: this._repository.environment[0],
       };
 
       this._repository.dinosaur.push(dinosaur);

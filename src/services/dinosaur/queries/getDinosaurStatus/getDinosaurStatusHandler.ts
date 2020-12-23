@@ -81,6 +81,11 @@ export default class GetDinosaurStatusHandler implements RequestHandler<GetDinos
       return 'The dinosaur seems extremely unhappy';
     }
 
+    const environmentFill = dinosaur.environment.food + dinosaur.environment.poop + dinosaur.environment.water;
+    if (environmentFill > 20) {
+      return 'The dinosaur seems troubled by its surroundings'
+    }
+
     if (dinosaur.thirst >= dinosaur.hunger && dinosaur.thirst > 3) {
       return 'The dinosaur seems thirsty';
     }

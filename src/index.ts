@@ -1,42 +1,27 @@
+import express from 'express';
+import environmentRouter from './routers/environmentRouter';
+import dinosaurRouter from './routers/dinosaurRouter';
+import {IncrementTimeBasedEventsRequest, BasicRequestHandler} from './services';
 import container from './config/iocConfig';
-import SERVICE_IDENTIFIER from './data/models/constants/identifiers';
-import {
-  BasicRequestHandler,
-  RequestHandler,
-  CreateDinosaurRequest,
-  GetDinosaurInfoRequest,
-  GetDinosaurInfoResponse,
-  GetDinosaurStatusRequest,
-  GetDinosaurStatusResponse,
-  GetEnvironmentStatusRequest,
-} from './services';
 import SERVICE_IDENTIFIERS from './data/models/constants/identifiers';
 
-const createDinosaurHandler = container.get<BasicRequestHandler<CreateDinosaurRequest>>(SERVICE_IDENTIFIER.CREATE_DINOSAUR_HANDLER);
-const getDinosaurInfoHandler = container.get<RequestHandler<GetDinosaurInfoRequest, GetDinosaurInfoResponse>>(SERVICE_IDENTIFIERS.GET_DINOSAUR_INFO_HANDLER);
-const getDinosaurStatusHandler = container.get<RequestHandler<GetDinosaurStatusRequest, GetDinosaurStatusResponse>>(SERVICE_IDENTIFIERS.GET_DINOSAUR_STATUS_HANDLER);
-const getEnvironmentStatusHandler = container.get<RequestHandler<GetEnvironmentStatusRequest, GetEnvironmentStatusRequest>>(SERVICE_IDENTIFIERS.GET_ENVIRONMENT_STATUS_HANDLER);
+const app = express();
+app.use(express.json());
 
-const createRes1 = createDinosaurHandler.handleRequest({
-  name: 'Bill',
-});
+const port = process.env.Port || '8000';
 
-const createRes2 = createDinosaurHandler.handleRequest({
-  name: 'Ash',
-});
+app.use('/environment', environmentRouter);
+app.use('/dinosaur', dinosaurRouter);
 
-const getRes = getDinosaurInfoHandler.handleRequest({});
+const incrementTimeBasedEventsHandler = container.get<BasicRequestHandler<IncrementTimeBasedEventsRequest>>(SERVICE_IDENTIFIERS.INCREMENT_TIME_BASED_EVENTS_HANDLER);
 
-const getStatusRes = getDinosaurStatusHandler.handleRequest({});
+setInterval(() => {
+  incrementTimeBasedEventsHandler.handleRequest({});
+}, 30 * 1000)
 
-console.log('Request 1:');
-console.log(`Response: ${createRes1.statusCode.toString()}`);
-console.log();
-console.log('Request 2:');
-console.log(`Response: ${createRes2.statusCode.toString()}`);
-console.log();
-console.log('Get result:');
-console.log(`Name: ${getRes.successResponse.dinosaur.name}, Age: ${getRes.successResponse.dinosaur.age}`);
-console.log(`Status: ${getStatusRes.successResponse.status}`);
-
-console.log(getEnvironmentStatusHandler.handleRequest({}).successResponse);
+app.listen(port, () => {
+  return console.log(`server is listening on ${port}`);
+})
+    .on('error', (err) => {
+      return console.error(err);
+    });

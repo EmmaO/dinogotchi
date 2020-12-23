@@ -1,24 +1,29 @@
 import {StatusCodes} from 'http-status-codes';
 import Repository from '../../../../data/repository';
 import {BasicHandlerResponse} from '../../../../services/generic/handlerResponse';
-import {BasicRequestHandler} from '../../../../services/generic/requestHandler';
+import {DinoInteractionCommandHandler} from '../../../../services/generic/requestHandler';
 import KilLDinosaurRequest from './killDinosaurRequest';
-import ERRORS from '../../../../data/models/constants/errors';
 import {ZonedDateTime, ZoneRegion} from '@js-joda/core';
 import CAUSE_OF_DEATH from '../../../../data/models/constants/causeOfDeath';
+import {inject, injectable} from 'inversify';
+import SERVICE_IDENTIFIERS from '../../../../data/models/constants/identifiers';
+import DinosaurDeathUpdater from '../../common/dinosaurDeathUpdate/dinosaurDeathUpdater';
 
+@injectable()
 /**
  * Handler for killing the dinosaur
  */
-export default class KillDinosaurHandler implements BasicRequestHandler<KilLDinosaurRequest> {
-  private _repository : Repository;
-
+export default class KillDinosaurHandler extends DinoInteractionCommandHandler<KilLDinosaurRequest> {
   /**
    * Constructor
-   * @param {Repository} repository datastore containing the dinosaur
+   * @param {Repository} repository The datastore containing the dinosaur,
+   * @param {DinosaurDeathUpdater} dinosaurDeathUpdater Service for updating death status of dinosaur
    */
-  public constructor(repository : Repository) {
-    this._repository = repository;
+  public constructor(
+    @inject(SERVICE_IDENTIFIERS.REPOSITORY) repository : Repository,
+    @inject(SERVICE_IDENTIFIERS.DINOSAUR_DEATH_UPDATER) dinosaurDeathUpdater : DinosaurDeathUpdater,
+  ) {
+    super(repository, dinosaurDeathUpdater);
   }
 
   /**
@@ -26,16 +31,7 @@ export default class KillDinosaurHandler implements BasicRequestHandler<KilLDino
    * @param {KillDinosaurRequest} request The request
    * @return {BasicHandlerResponse} response indicating success
    */
-  public handleRequest(request : KilLDinosaurRequest) : BasicHandlerResponse {
-    if (this._repository.dinosaur.length == 0) {
-      return {
-        statusCode: StatusCodes.NOT_FOUND,
-        errors: [{
-          error: ERRORS.NO_DINOSAUR,
-        }],
-      }
-    }
-
+  public handleDinosaurInteraction(request : KilLDinosaurRequest) : BasicHandlerResponse {
     const dinosaur = this._repository.dinosaur[0];
     dinosaur.alive = false;
     dinosaur.died = ZonedDateTime.now(ZoneRegion.UTC).toInstant();

@@ -27,11 +27,18 @@ export {default as ClearDinosaurAndWasteHandler} from './environment/commands/cl
 export {default as ClearWasteRequest} from './environment/commands/clearWaste/clearWasteRequest';
 export {default as ClearWasteHandler} from './environment/commands/clearWaste/clearWasteHandler';
 
+export {default as IncrementTimeBasedEventsRequest} from './dinosaur/commands/incrementTimeBasedEvents/incrementTimeBasedEventsRequest';
+export {default as IncrementTimeBasedEventsHandler} from './dinosaur/commands/incrementTimeBasedEvents/incrementTimeBasedEventsHandler';
+
 export {default as GetEnvironmentStatusRequest} from './environment/queries/getEnvironmentStatus/getEnvironmentStatusRequest';
 export {default as GetEnvironmentStatusResponse} from './environment/queries/getEnvironmentStatus/getEnvironmentStatusResponse';
 export {default as GetEnvironmentStatusHandler} from './environment/queries/getEnvironmentStatus/getEnvironmentStatusHandler';
 
+export {default as DinosaurDeathChecker} from './dinosaur/common/dinosaurDeathUpdate/dinosaurDeathChecker';
+export {default as FullDinosaurDeathChecker} from './dinosaur/common/dinosaurDeathUpdate/fullDinosaurDeathChecker';
+export {default as DinosaurDeathUpdater} from './dinosaur/common/dinosaurDeathUpdate/dinosaurDeathUpdater';
+export {default as SingleDinosaurDeathUpdater} from './dinosaur/common/dinosaurDeathUpdate/singleDinosaurDeathUpdater';
 
 export {default as ErrorResponse} from './generic/errorResponse';
-export {RequestHandler, BasicRequestHandler} from './generic/requestHandler';
+export {RequestHandler, BasicRequestHandler, DinoInteractionCommandHandler as BaseCommandHandler} from './generic/requestHandler';
 export {HandlerResponse, BasicHandlerResponse} from './generic/handlerResponse';

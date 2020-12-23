@@ -20,7 +20,9 @@
   "dependencies": {
     "@js-joda/core": "^3.2.0",
     "@js-joda/timezone": "^2.3.0",
-    "express": "^4.17.1"
+    "@types/express-validator": "^3.0.0",
+    "express": "^4.17.1",
+    "express-validator": "^6.8.1"
   },
   "scripts": {
     "dev": "nodemon --watch 'src/**/*.ts' --exec 'ts-node' src/index.ts",

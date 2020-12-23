@@ -1,25 +1,31 @@
 import {StatusCodes} from 'http-status-codes';
+import {inject, injectable} from 'inversify';
+import SERVICE_IDENTIFIERS from '../../../../data/models/constants/identifiers';
 import ERRORS from '../../../../data/models/constants/errors';
 import Repository from '../../../../data/repository';
 import {BasicHandlerResponse} from '../../../../services/generic/handlerResponse';
-import {BasicRequestHandler} from '../../../../services/generic/requestHandler';
+import {DinoInteractionCommandHandler} from '../../../../services/generic/requestHandler';
 import WaterDinosaurRequest from './waterDinosaurRequest';
+import DinosaurDeathUpdater from '../../common/dinosaurDeathUpdate/dinosaurDeathUpdater';
 
+@injectable()
 /**
  * Handler for watering the dinosaur
  */
-export default class WaterDinosaurHandler implements BasicRequestHandler<WaterDinosaurRequest> {
-  private _repository : Repository;
-
+export default class WaterDinosaurHandler extends DinoInteractionCommandHandler<WaterDinosaurRequest> {
   private _baseAmountToReduceThirstBy : number = 7;
   private _maxBoredomToDrink : number = 9;
 
   /**
    * Constructor
-   * @param {Repository} repository Datastore containing the dinosaur
+   * @param {Repository} repository The datastore containing the dinosaur,
+   * @param {DinosaurDeathUpdater} dinosaurDeathUpdater Service for updating death status of dinosaur
    */
-  public constructor(repository : Repository) {
-    this._repository = repository;
+  public constructor(
+    @inject(SERVICE_IDENTIFIERS.REPOSITORY) repository : Repository,
+    @inject(SERVICE_IDENTIFIERS.DINOSAUR_DEATH_UPDATER) dinosaurDeathUpdater : DinosaurDeathUpdater,
+  ) {
+    super(repository, dinosaurDeathUpdater);
   }
 
   /**
@@ -27,16 +33,7 @@ export default class WaterDinosaurHandler implements BasicRequestHandler<WaterDi
    * @param {WaterDinosaurRequest} request The request
    * @return {BasicHandlerResponse} response to indicate success
    */
-  public handleRequest(request: WaterDinosaurRequest) : BasicHandlerResponse {
-    if (this._repository.dinosaur.length == 0) {
-      return {
-        statusCode: StatusCodes.NOT_FOUND,
-        errors: [{
-          error: ERRORS.NO_DINOSAUR,
-        }],
-      };
-    }
-
+  public handleDinosaurInteraction(request: WaterDinosaurRequest) : BasicHandlerResponse {
     const dinosaur = this._repository.dinosaur[0];
 
     if (dinosaur.grumpiness > this._maxBoredomToDrink) {
@@ -50,6 +47,11 @@ export default class WaterDinosaurHandler implements BasicRequestHandler<WaterDi
 
     const amountToReduceThirstBy = this._baseAmountToReduceThirstBy - dinosaur.size;
     dinosaur.thirst -= amountToReduceThirstBy;
+
+    if (dinosaur.thirst < 0) {
+      dinosaur.environment.water += (dinosaur.thirst * -1);
+      dinosaur.thirst = 0;
+    }
 
     return {
       statusCode: StatusCodes.OK,
