@@ -96,10 +96,8 @@ export default class GetEnvironmentStatusHandler implements RequestHandler<GetEn
       return 'nothing';
     } else if (input.length == 1) {
       return input[0];
-    } else if (input.length == 2) {
-      return `${input[0]} and ${input[1]}`;
     } else {
-      return `${input.slice(0, input.length - 2).join(', ')} and ${input[input.length - 1]}`;
+      return `${input.slice(0, input.length - 1).join(', ')} and ${input[input.length - 1]}`;
     }
   }
 }
