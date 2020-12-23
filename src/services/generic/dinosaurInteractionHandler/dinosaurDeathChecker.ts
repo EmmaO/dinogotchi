@@ -1,4 +1,4 @@
-import {Dinosaur} from '../../../../data/models';
+import {Dinosaur} from '../../../data/models';
 import {DinosaurHealthSummary} from './dinosaurHealthSummary';
 
 export default interface DinosaurDeathChecker {

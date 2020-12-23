@@ -2,7 +2,7 @@ import {StatusCodes} from 'http-status-codes';
 import {injectable} from 'inversify';
 import ERRORS from '../../data/models/constants/errors';
 import Repository from '../../data/repository';
-import DinosaurDeathUpdater from '../dinosaur/common/dinosaurDeathUpdate/dinosaurDeathUpdater';
+import DinosaurDeathUpdater from './dinosaurInteractionHandler/dinosaurDeathUpdater'
 import {BasicHandlerResponse, HandlerResponse} from './handlerResponse';
 
 export interface RequestHandler<TRequest, TResponse> {

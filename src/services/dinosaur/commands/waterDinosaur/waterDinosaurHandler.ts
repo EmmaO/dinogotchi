@@ -6,7 +6,7 @@ import Repository from '../../../../data/repository';
 import {BasicHandlerResponse} from '../../../../services/generic/handlerResponse';
 import {DinoInteractionCommandHandler} from '../../../../services/generic/requestHandler';
 import WaterDinosaurRequest from './waterDinosaurRequest';
-import DinosaurDeathUpdater from '../../common/dinosaurDeathUpdate/dinosaurDeathUpdater';
+import DinosaurDeathUpdater from '../../../generic/dinosaurInteractionHandler/dinosaurDeathUpdater'
 
 @injectable()
 /**

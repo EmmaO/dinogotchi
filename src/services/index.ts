@@ -34,10 +34,10 @@ export {default as GetEnvironmentStatusRequest} from './environment/queries/getE
 export {default as GetEnvironmentStatusResponse} from './environment/queries/getEnvironmentStatus/getEnvironmentStatusResponse';
 export {default as GetEnvironmentStatusHandler} from './environment/queries/getEnvironmentStatus/getEnvironmentStatusHandler';
 
-export {default as DinosaurDeathChecker} from './dinosaur/common/dinosaurDeathUpdate/dinosaurDeathChecker';
-export {default as FullDinosaurDeathChecker} from './dinosaur/common/dinosaurDeathUpdate/fullDinosaurDeathChecker';
-export {default as DinosaurDeathUpdater} from './dinosaur/common/dinosaurDeathUpdate/dinosaurDeathUpdater';
-export {default as SingleDinosaurDeathUpdater} from './dinosaur/common/dinosaurDeathUpdate/singleDinosaurDeathUpdater';
+export {default as DinosaurDeathChecker} from './generic/dinosaurInteractionHandler/dinosaurDeathChecker';
+export {default as FullDinosaurDeathChecker} from './generic/dinosaurInteractionHandler/fullDinosaurDeathChecker';
+export {default as DinosaurDeathUpdater} from './generic/dinosaurInteractionHandler/dinosaurDeathUpdater';
+export {default as SingleDinosaurDeathUpdater} from './generic/dinosaurInteractionHandler/singleDinosaurDeathUpdater';
 
 export {default as ErrorResponse} from './generic/errorResponse';
 export {RequestHandler, BasicRequestHandler, DinoInteractionCommandHandler as BaseCommandHandler} from './generic/requestHandler';

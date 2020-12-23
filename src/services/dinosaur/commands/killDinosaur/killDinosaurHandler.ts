@@ -7,7 +7,7 @@ import {ZonedDateTime, ZoneRegion} from '@js-joda/core';
 import CAUSE_OF_DEATH from '../../../../data/models/constants/causeOfDeath';
 import {inject, injectable} from 'inversify';
 import SERVICE_IDENTIFIERS from '../../../../data/models/constants/identifiers';
-import DinosaurDeathUpdater from '../../common/dinosaurDeathUpdate/dinosaurDeathUpdater';
+import DinosaurDeathUpdater from '../../../generic/dinosaurInteractionHandler/dinosaurDeathUpdater';
 
 @injectable()
 /**

@@ -33,10 +33,10 @@ import {
   IncrementTimeBasedEventsRequest,
   IncrementTimeBasedEventsHandler,
 } from '../services/index';
-import DinosaurDeathChecker from '../services/dinosaur/common/dinosaurDeathUpdate/dinosaurDeathChecker';
-import FullDinosaurDeathChecker from '../services/dinosaur/common/dinosaurDeathUpdate/fullDinosaurDeathChecker';
-import DinosaurDeathUpdater from '../services/dinosaur/common/dinosaurDeathUpdate/dinosaurDeathUpdater';
-import SingleDinosaurDeathUpdater from '../services/dinosaur/common/dinosaurDeathUpdate/singleDinosaurDeathUpdater';
+import DinosaurDeathChecker from '../services/generic/dinosaurInteractionHandler/dinosaurDeathChecker';
+import FullDinosaurDeathChecker from '../services/generic/dinosaurInteractionHandler/fullDinosaurDeathChecker';
+import DinosaurDeathUpdater from '../services/generic/dinosaurInteractionHandler/dinosaurDeathUpdater';
+import SingleDinosaurDeathUpdater from '../services/generic/dinosaurInteractionHandler/singleDinosaurDeathUpdater';
 
 const container = new Container();
 container

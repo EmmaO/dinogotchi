@@ -5,7 +5,7 @@ import PlayWithDinosaurRequest from './playWithDinosaurRequest';
 import {StatusCodes} from 'http-status-codes';
 import {inject, injectable} from 'inversify';
 import SERVICE_IDENTIFIERS from '../../../../data/models/constants/identifiers';
-import DinosaurDeathUpdater from '../../common/dinosaurDeathUpdate/dinosaurDeathUpdater';
+import DinosaurDeathUpdater from '../../../generic/dinosaurInteractionHandler/dinosaurDeathUpdater'
 
 @injectable()
 /**

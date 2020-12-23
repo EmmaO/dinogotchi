@@ -1,7 +1,7 @@
 import {ZonedDateTime, ZoneRegion} from '@js-joda/core';
 import {inject, injectable} from 'inversify';
-import SERVICE_IDENTIFIERS from '../../../../data/models/constants/identifiers';
-import Repository from '../../../../data/repository';
+import SERVICE_IDENTIFIERS from '../../../data/models/constants/identifiers';
+import Repository from '../../../data/repository';
 import DinosaurDeathChecker from './dinosaurDeathChecker';
 import DinosaurDeathUpdater from './dinosaurDeathUpdater';
 import {healthStatus} from './healthStatus';
