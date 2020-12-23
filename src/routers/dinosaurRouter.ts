@@ -30,7 +30,7 @@ router.get('/', (req, res) => {
 router.get('/status', (req, res) => {
   const getDinosaurStatusHandler = container.get<RequestHandler<GetDinosaurStatusRequest, GetDinosaurStatusResponse>>(SERVICE_IDENTIFIERS.GET_DINOSAUR_STATUS_HANDLER);
   const handlerResponse = getDinosaurStatusHandler.handleRequest({});
-  const response = handlerResponse.statusCode < 300 ? {} : handlerResponse.errors;
+  const response = handlerResponse.statusCode < 300 ? handlerResponse.successResponse : handlerResponse.errors;
 
   res.status(handlerResponse.statusCode).json(response);
 });

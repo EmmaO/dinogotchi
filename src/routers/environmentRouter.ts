@@ -16,7 +16,7 @@ const router = express.Router();
 router.get('/status', (req, res) => {
   const getEnvironmentStatusHandler = container.get<RequestHandler<GetEnvironmentStatusRequest, GetEnvironmentStatusRequest>>(SERVICE_IDENTIFIERS.GET_ENVIRONMENT_STATUS_HANDLER);
   const handlerResponse = getEnvironmentStatusHandler.handleRequest({});
-  const response = handlerResponse.statusCode < 300 ? {} : handlerResponse.errors;
+  const response = handlerResponse.statusCode < 300 ? handlerResponse.successResponse : handlerResponse.errors;
 
   res.status(handlerResponse.statusCode).json(response);
 });
